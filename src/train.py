@@ -82,8 +82,6 @@ def convolutional_layers():
     
     return model 
 
-#Ausgleichen der Klassenungleichheit im Trainingsdataset
-class_weights = {0: 1.0, 1: 1.2} #Klasse 1(tumor) wird höher gewichtet, weil 20% in die Validation geht, jedoch gilt das auch für das test dataset was eigentlich ausgeglichen ist
 
 #Early stopping um Overfitting (Überlernen) zu vermeiden
 early_stopping = tf.keras.callbacks.EarlyStopping(
@@ -100,7 +98,7 @@ model_checkpoint = tf.keras.callbacks.ModelCheckpoint(
  ) #Ein Dateipfad wird nicht benötigt da es da hin gespeichert wird wo das Skript ausgeführt wird
 
 model = convolutional_layers()
-model.fit(train_gen, epochs = 500, validation_data = validation_gen, callbacks=[early_stopping, model_checkpoint], class_weight=class_weights) 
+model.fit(train_gen, epochs = 500, validation_data = validation_gen, callbacks=[early_stopping, model_checkpoint]) 
     #Maximal 1000 Epochen aber Early_Stopping wird vorher stoppen und Model_checkpoint wird dieses Speichern 
 
 #Testen des modells nach dem training
