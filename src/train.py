@@ -1,14 +1,18 @@
-import tensorflow as tf  #type: ignore
-from tensorflow.keras import layers, models  #type: ignore
-from tensorflow.keras.preprocessing.image import ImageDataGenerator #type: ignore
-import numpy as np  # type: ignore
+import tensorflow as tf  
+from tensorflow.keras import layers, models
+from tensorflow.keras.preprocessing.image import ImageDataGenerator
+import numpy as np
 import os
+import kagglehub
+
+# Download dataset from Kaggle Hub
+path = kagglehub.dataset_download("orvile/ultrasound-fetus-dataset")
 
 #Datenvorbereitung für das Train- und Validation Dataset
 train_datagen = ImageDataGenerator(rescale=1./255, validation_split=0.2) #20% der Trainingsdaten werden für die Validierung verwendet
 
 train_gen = train_datagen.flow_from_directory(
-    r'C:\Users\Loran\Downloads\Dataset\Train',      
+    os.path.join(path, 'Train'),      
     target_size=(400, 270),
     batch_size=32, # Update: Batch size verdoppelt für beschleunigtes Training und Testen
     class_mode='binary', # Nur 2 klassen vorhanden also wird binary verwendet
@@ -16,7 +20,7 @@ train_gen = train_datagen.flow_from_directory(
 )
 
 validation_gen = train_datagen.flow_from_directory(
-    r'C:\Users\Loran\Downloads\Dataset\Train',
+    os.path.join(path, 'Train'),
     target_size=(400, 270),
     batch_size=32,
     class_mode='binary',
@@ -27,7 +31,7 @@ validation_gen = train_datagen.flow_from_directory(
 test_datagen = ImageDataGenerator(rescale=1./255)
 
 test_gen = test_datagen.flow_from_directory(
-    r'C:\Users\Loran\Downloads\Dataset\Test',
+    os.path.join(path, 'Test'),
     target_size=(400, 270), #Bildgröße wird von 800x540 auf 400x270 verkleinert um Rechenleistung zu sparen aber genug Details zu behalten)
     batch_size=32,
     class_mode='binary', #subset nicht notwendig da es nur zum Testen verwendet wird anders als beim gesplitteten Train dataset
