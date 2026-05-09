@@ -63,7 +63,7 @@ Future Work:
 ----
 Disclaimer:
 ----
-This is my first Project working with AI therefore results won't be very good
+This is my first Project working with AI therefore results won't be very good.
 
 I did not create the dataset required for the CNN.
 
