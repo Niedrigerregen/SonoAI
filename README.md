@@ -81,5 +81,5 @@ Citation
 Anitha, A (2024). Ultrasound Fetus Dataset. Mendeley Data, V1, doi: 10.17632/yrzzw9m6kk.1
 
 ----
-*made by Loran Hisso*
+*made by Loran Hisso, not AI*
 ----
